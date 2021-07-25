@@ -28,7 +28,7 @@ enum Magnitude          { giant,    large,    small,  tiny };
 enum Directionality     { directed, undirected };
 enum FileFormat         { csv,      node,   pajak,  ucinet };
 
-using Integer       =   std::uint_fast64_t;
+using Integer       =   std::int_fast64_t; // std::uint_fast64_t;
 using ID            =   Integer;
 
 using Node          =   ID;

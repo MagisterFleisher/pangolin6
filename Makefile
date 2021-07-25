@@ -1,4 +1,4 @@
-APP := 				pangolin0.6.1.0
+APP := 				pangolin0.6.1.1
 #CXX := 				g++-11
 CXX := 				clang++-12
 # CXX :=				nvcc

@@ -29,7 +29,7 @@ Nodelist ParseNodelist(std::ifstream csv, const std::string& full_name, const in
     switch(skip_lines) {
         case 0 : break;
         default: {
-            for(int i = 0; i < skip_lines; i++) { csv.ignore(10,'\n'); }                        /* When specified, Ignore the first n lines of the CSV file. */
+            for(auto i = 0; i != skip_lines; i++) { csv.ignore(10,'\n'); }                        /* When specified, Ignore the first n lines of the CSV file. */
             break;}; }
     while(std::getline(csv, line)) {
         Node node;
@@ -49,7 +49,7 @@ Edgelist ParseEdgelist(std::ifstream csv, const std::string& full_name, const in
     switch(skip_lines) {
         case 0 : break;
         default: {
-            for(int i = 0; i < skip_lines; i++) { csv.ignore(10,'\n'); }                        /* When specified, Ignore the first n lines of the CSV file. */
+            for(auto i = 0; i != skip_lines; i++) { csv.ignore(10,'\n'); }                        /* When specified, Ignore the first n lines of the CSV file. */
             break;}; }
     while(std::getline(csv, line)) {
         Edge edge;
@@ -103,7 +103,7 @@ Nodelist ReadNodelist_CSV(const std::string& file_name, const int& skip_lines, c
     std::string                 line;
     if(csv.fail()) { const auto& error_return (FileOpenError(full_name)); /* Check if file can open.  Exit with error if not.  */ }
     switch(skip_lines) { case 0 : break; default: {
-        for(int i = 0; i < skip_lines; i++) { csv.ignore(10,'\n'); }                        /* When specified, Ignore the first n lines of the CSV file. */
+        for(auto i = 0; i != skip_lines; i++) { csv.ignore(10,'\n'); }                        /* When specified, Ignore the first n lines of the CSV file. */
         break;}; }                                                                          // std::cout << "\tRead_CSV: Begin reading file\n";
     while(std::getline(csv, line)) { nodes.emplace_back(ParseNode(line, base)); }     // std::cout << "\tRead_CSV: File successfully read\n\tCalling NodelistGen: Generating node list\n";
     return nodes; }

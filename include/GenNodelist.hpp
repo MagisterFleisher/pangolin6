@@ -23,8 +23,8 @@ Nodelist SquishNodelist(Nodelist& nodes) { //       std::cout << "\tCalled Squis
 Nodelist GenNodelist(const Edgelist& edges) { //    std::cout << "Called NodelistGen: Edge count "  << edges.size() << "\n";
     Nodelist nodes;
     for(const auto& edge : edges) { nodes.emplace_back(edge.from); }
-    nodes = std::move(SquishNodelist(nodes));
+    nodes = SquishNodelist(nodes);
     for(const auto& edge : edges) { nodes.emplace_back(edge.to); }
-    nodes = std::move(SquishNodelist(nodes));
+    nodes = SquishNodelist(nodes);
     return nodes; }
 #endif//PANGOLIN_NODELISTGEN_HPP

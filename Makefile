@@ -1,11 +1,11 @@
-APP := 				pangolin0.6.0.0
-CXX := 				g++-11
+APP := 				pangolin0.6.1.0
+#CXX := 				g++-11
 CXX := 				clang++-12
 # CXX :=				nvcc
 BUILDDIR +=			build/
 CXXFLAGS += 		$(CXXSTDFLAGS) $(CXXOPTFLAGS) $(CXXLIBFLAGS) $(CXXMACROFLAGS) $(CXXDEBUGFLAGS) $(LINKDIR)
-CXXSTDFLAGS +=		-std=c++20
-CXXOPTFLAGS +=		-Ofast -march=native -fimplicit-modules -fimplicit-module-maps -fprebuilt-module-path=. # -fprofile-use -fpermissive
+CXXSTDFLAGS +=		-std=c++2a
+CXXOPTFLAGS +=		-Ofast -march=native # -fimplicit-modules -fimplicit-module-maps -fprebuilt-module-path=. # -fprofile-use -fpermissive
 CXXLIBFLAGS +=		-lstdc++ -pthread -lpthread -fopenmp -ltbb -lomp
 CXXMACROFLAGS +=	-D_GLIBCXX_PARALLEL
 CXXDEBUGFLAGS +=	-Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wduplicated-cond -Wduplicated-branches -Wuseless-cast -Wconversion -Wpessimizing-move -Wredundant-move -Wunused -Wsign-conversion # -Wpedantic 

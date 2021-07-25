@@ -33,16 +33,14 @@ using ID            =   Integer;
 
 using Node          =   ID;
 using Nodelist      =   std::vector<Node>;
-// using Altermap      =   std::unordered_map<Node, Nodelist>;
 
 typedef struct {
     ID id;
     Node from;
     Node to;        }   Edge;
 using Edgelist      =   std::vector<Edge>;
-// using Edgemap      =   std::unordered_map<Edge, Edgelist>;
 
-typedef struct {
+typedef struct Graph {
     Magnitude           magnitude;
     Directionality      directionality = directed;
     Edgelist            edges;

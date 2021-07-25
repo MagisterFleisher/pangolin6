@@ -72,7 +72,7 @@ NodeAttributes GenAllNodeAttributes(const Graph& graph, const Altermap& altermap
 int main(int argc, char* argv[]) {
     const auto                         startTimeAll         (high_resolution_clock::now());
     const std::string&                 file_name            (argv[1]);
-    const std::uint8_t&                skip_lines           (static_cast<std::uint8_t> (std::stoi(argv[2], nullptr, 10)) );  /* how many lines to skip at beginning of csv */
+    const std::size_t&                 skip_lines           (static_cast<std::size_t>  (std::stoi(argv[2], nullptr, 10)) );  /* how many lines to skip at beginning of csv */
     const std::uint8_t&                base_read            (static_cast<std::uint8_t> (std::stoi(argv[3], nullptr, 10)) );
     // const std::uint8_t&                  base_write             (static_cast<std::uint8_t> (std::stoi(argv[4], nullptr, 10)) );
 
@@ -84,9 +84,9 @@ int main(int argc, char* argv[]) {
     Summarize_Graph(raw_graph);
     print_results("ReadGraph_CSV(graph)", startTimeReadCSV, endTimeReadCSV);
 
-    const auto                              startTimeSimplify       (high_resolution_clock::now());
-    Graph                                   graph                   (SimplifyGraph(raw_graph));
-    const auto                              endTimeSimplify         (high_resolution_clock::now());
+    const auto                         startTimeSimplify    (high_resolution_clock::now());
+    Graph                              graph                (SimplifyGraph(raw_graph));
+    const auto                         endTimeSimplify      (high_resolution_clock::now());
 
     Summarize_Graph(graph);
     print_results("SimplifyGraph(raw_graph, undirected)", startTimeSimplify, endTimeSimplify);
@@ -96,7 +96,8 @@ int main(int argc, char* argv[]) {
         graph.edges.shrink_to_fit();
         graph.nodes.clear();
         graph.nodes.shrink_to_fit();
-        Graph& graph (raw_graph); }
+        // Graph& graph (raw_graph);
+        }
 
     std::cout << "\nCalling Gen_NodeAlters of graph\n";
     const auto                              startTimeNodeAlters     (high_resolution_clock::now());
@@ -121,17 +122,19 @@ int main(int argc, char* argv[]) {
 
     std::cout << "\nCalling out-Degree of raw graph\n";
     const auto                              startTimeDegree_out     (high_resolution_clock::now());
-    const std::unordered_map<Node, Integer>& node_attributes_out    (Degree(raw_graph, out));
+    const auto                              node_attributes_out    (Degree(raw_graph, out));
     const auto                              endTimeDegree_out       (high_resolution_clock::now());
 //    Summarize_Nodes(node_attributes_out);
     print_results("Degree(raw_graph, in)", startTimeDegree_out, endTimeDegree_out);
 
     std::cout << "\nCalling Prestige of raw graph\n";
     const auto                              startTimePrestige       (high_resolution_clock::now());
-    const std::unordered_map<Node, float>&  node_prestige_both      (Prestige<Integer>(node_alters, node_degree));
+    const auto                              node_prestige_both      (Prestige<Integer>(raw_graph, node_alters, node_degree, raw_graph.nodes.size()));
     const auto                              endTimePrestige         (high_resolution_clock::now());
-    Summarize_Prestige(node_prestige_both);
     print_results("PrestigeSimple(raw_graph, in)", startTimePrestige, endTimePrestige);
+    // Summarize_Prestige(node_prestige_both);
+
+    // for(auto node : raw_graph.nodes) { std::cout << "Node: " << node << "\n"; }
 
     // std::string                          write_file_name        (file_name);
     // const auto&                          write_err              (WriteGraph_CSV(graph, write_file_name, base_write));

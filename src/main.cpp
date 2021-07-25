@@ -70,7 +70,7 @@ NodeAttributes GenAllNodeAttributes(const Graph& graph, const Altermap& altermap
     return node_attributes_table; } */
 
 int main(int argc, char* argv[]) {
-    const auto                         startTimeAll         (high_resolution_clock::now());
+    // const auto                         startTimeAll         (high_resolution_clock::now());
     const std::string&                 file_name            (argv[1]);
     const std::size_t&                 skip_lines           (static_cast<std::size_t>  (std::stoi(argv[2], nullptr, 10)) );  /* how many lines to skip at beginning of csv */
     const std::uint8_t&                base_read            (static_cast<std::uint8_t> (std::stoi(argv[3], nullptr, 10)) );
@@ -127,9 +127,11 @@ int main(int argc, char* argv[]) {
 //    Summarize_Nodes(node_attributes_out);
     print_results("Degree(raw_graph, in)", startTimeDegree_out, endTimeDegree_out);
 
+
     std::cout << "\nCalling Prestige of raw graph\n";
+    const auto node_size (raw_graph.nodes.size());
     const auto                              startTimePrestige       (high_resolution_clock::now());
-    const auto                              node_prestige_both      (Prestige<Integer>(raw_graph, node_alters, node_degree, raw_graph.nodes.size()));
+    const auto                              node_prestige_both      (Prestige<decltype(node_degree), decltype(node_size)>(raw_graph, node_alters, node_degree, node_size));
     const auto                              endTimePrestige         (high_resolution_clock::now());
     print_results("PrestigeSimple(raw_graph, in)", startTimePrestige, endTimePrestige);
     // Summarize_Prestige(node_prestige_both);

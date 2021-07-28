@@ -46,7 +46,8 @@ void Summarize_Graph(const Graph& g) {
 void Summarize_Nodes(const std::unordered_map<Node, Integer>& Degree) {
     for(const auto& [node, degree] : Degree) { std::cout << "Node: " << node << " Degree: " << degree << "\n"; } }
 
-void Summarize_Prestige(const std::unordered_map<Node, float>& Prestige) {
+template<typename Prestige_type>
+void Summarize_Prestige(const Prestige_type& Prestige) {
     std::vector<ID> key_vector;
     for(const auto& [node, prestige] : Prestige) { key_vector.emplace_back(node); }
     std::sort(RANGE(key_vector));

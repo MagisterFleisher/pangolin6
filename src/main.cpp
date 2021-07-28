@@ -29,6 +29,7 @@
 #include "ReadFile.hpp"
 #include "SimplifyGraph.hpp"
 #include "Types.hpp"
+#include "EigenLibraryTest.hpp"
 // #include "GenCliques.hpp"
 // #include "GenEdgemap.hpp"
 // #include "GenNodeEdgemap.hpp"
@@ -138,7 +139,15 @@ int main(int argc, char *argv[])
     const auto node_prestige_both(Prestige<decltype(node_degree), decltype(node_size)>(raw_graph, node_alters, node_degree, node_size));
     const auto endTimePrestige(high_resolution_clock::now());
     print_results("PrestigeSimple(raw_graph, in)", startTimePrestige, endTimePrestige);
-    // Summarize_Prestige(node_prestige_both);
+    Summarize_Prestige(node_prestige_both);
+
+    std::cout << "\nCalling EigenLibraryTest\n";
+    const auto startEigenLibraryTest(high_resolution_clock::now());
+    EigenTest();
+    const auto endEigenLibraryTest(high_resolution_clock::now());
+    //    Summarize_Nodes(node_attributes_out);
+    print_results("EigenLibraryTest()", startTimeDegree_out, endTimeDegree_out);
+
 
     // for(auto node : raw_graph.nodes) { std::cout << "Node: " << node << "\n"; }
 

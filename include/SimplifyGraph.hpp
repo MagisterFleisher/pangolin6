@@ -14,7 +14,7 @@ Nodelist To_Undirected(Nodelist order_edge) {
     return order_edge; }
 
 std::vector<Nodelist> Edge_Reduce(std::vector<Nodelist> node_node_list, const Edgelist& edges, const Directionality& direction) {
-    std::for_each(std::execution::unseq, cRANGE(edges), [&node_node_list, &direction](const auto& edge) {
+    std::for_each(std::execution::unseq, cRANGE(edges), [&node_node_list, &direction](const auto& edge) {  //   Not vectorized
         Nodelist order_edge {edge.from, edge.to};
         if(direction == undirected) {
             order_edge = To_Undirected(order_edge);

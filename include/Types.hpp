@@ -22,6 +22,15 @@ item_type UniqueVector(item_type it) {
     it.shrink_to_fit();
     return it; }
 
+template<typename Numeric_Vector, typename Max_Value>
+Max_Value FindMaxValue(Numeric_Vector numeric_vector) {
+    return static_cast<Max_Value>(numeric_vector.at(
+        std::distance(
+            numeric_vector.begin(),
+            std::max_element(
+                std::execution::par_unseq,
+                RANGE(numeric_vector))))); }
+
 /********************* TYPES *******************************************/
 enum Direction          { in,       out,    both };
 enum Magnitude          { giant,    large,    small,  tiny };

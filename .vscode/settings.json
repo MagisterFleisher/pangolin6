@@ -66,6 +66,7 @@
         "typeinfo": "cpp",
         "valarray": "cpp",
         "semaphore": "cpp",
-        "dense": "cpp"
+        "dense": "cpp",
+        "complex": "cpp"
     }
 }

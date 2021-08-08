@@ -12,6 +12,7 @@
 #include "GenEdgemap.hpp"
 #include "Types.hpp"
 
+
 std::vector<std::vector<uint>> IncidenceMatrix(const Graph& g, const Edgemap& edgemap) {
     const Nodelist& nodes   (g.nodes);
     const Edgelist& edges   (g.edges);
